@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package todo;
+
+option go_package = "proto/todo";
+
+import "google/protobuf/empty.proto";
+
+message Task {
+    string text = 1;
+    bool done = 2;
+}
+
+message Text {
+    string text = 1;
+}
+
+message TaskList {
+   repeated Task tasks = 1;
+}
+
+service Tasks {
+   rpc List(google.protobuf.Empty) returns(TaskList) {}
+   rpc Add(Text) returns(Task) {}
+}
